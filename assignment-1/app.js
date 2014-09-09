@@ -1,9 +1,3 @@
-var bookmarks = [ 
-    {name: "Facebook", url: "http://facebook.com"},
-    {name: "Amazon", url: "http://amazon.com"},
-    {name: "Google", url: "http://google.com"}
-];
-
 var bookmarkList = {
 
 	$bookmarks: $('#bookmarks'),
@@ -13,7 +7,9 @@ var bookmarkList = {
 	 * @param {Object} bookmark
 	 */
 	createBookmarkHtml: function(bookmark) {
-		// Your implementation
+		var a = '<a href="'+bookmark.url+'">'+ bookmark.name +'</a>'
+		var li = '<li>'+ a +'</li>'
+		return li
 	},
 
 	/**
@@ -21,7 +17,9 @@ var bookmarkList = {
 	 * @param {Array} bookmarks
 	 */
 	render: function(bookmarks) {
-		// Your implementation
+		bookmarks.forEach(function(bookmark) {
+			bookmarkList.addOne(bookmark);
+		});
 	},
 
 	/**
@@ -29,15 +27,16 @@ var bookmarkList = {
 	 * @param {Object} bookmark
 	 */
 	addOne: function(bookmark) {
-		// Your implementation
+		var html = bookmarkList.createBookmarkHtml(bookmark);
+		$('#bookmarks').append(html);
 	}
 };
 
 var bookmarkValidation = {
 
 	passes: function(bookmark) {
-		nameNotEmpty = bookmarkValidation.isNotEmpty(bookmark.name);
-		urlValid = bookmarkValidation.hasValidUrl(bookmark.url);
+		var nameNotEmpty = bookmarkValidation.isNotEmpty(bookmark.name);
+		var urlValid = bookmarkValidation.hasValidUrl(bookmark.url);
 
 		return (nameNotEmpty && urlValid);
 	},
@@ -64,14 +63,23 @@ jQuery(function(){
 	$('#addBookmarkForm').submit(function(event) {
 		event.preventDefault();
 
-		name = $('#addBookmarkName').val();
-		url = $('#addBookmarkUrl').val();
-		bookmark = {name: name, url: url}
+		var name = $('#addBookmarkName').val();
+		var url = $('#addBookmarkUrl').val();
+		var bookmark = {name: name, url: url}
 
 		if (bookmarkValidation.passes(bookmark)) {
 			$("#error").hide();
+			bookmarkList.addOne(bookmark);
 		} else {
 			$("#error").show();
 		}
 	});
+
+	var bookmarks = [ 
+		{name: "Facebook", url: "http://facebook.com"},
+		{name: "Amazon", url: "http://amazon.com"},
+		{name: "Edlio", url: "http://edlio.com"}
+	];
+
+	bookmarkList.render(bookmarks);
 });
