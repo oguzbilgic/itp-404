@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>App</title>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body>
+
+	<h3>Search Movie</h3>
+
+	<form id="searchForm">
+		<input type="text" id="movieName" value="titanic" placeholder="Name" />
+		<input type="submit" value="Search">
+	</form>
+
+    <div id="loading" style="display:none;">
+		<p>loading</p>
+	</div>
+
+    <div id="error" style="display:none;">
+		<p>Your input is not valid</p>
+	</div>
+
+    <div id="movies">
+
+	</div>
+
+	<script id="movie-template" type="text/x-handlebars-template">
+		<div class="movie">
+			<p>{{title}}</p>
+			<img src="{{posters.thumbnail}}" />
+			<p>Audience Rating: {{ratings.audience_rating}}</p>
+			<p>Audience Score: {{ratings.audience_score}}</p>
+
+			<ul>
+			{{#each abridged_cast}}
+				<li>{{name}}</li>
+			{{/each}}
+			</ul>
+
+			{{#if synopsis}}
+			<p>Synopsis: {{synopsis}}</p>
+			{{else}}
+			<p>No synopsis available</p>
+			{{/if}}
+		</div>
+		<hr/>
+	</script>
+
+</body>
+</html>
