@@ -12,7 +12,7 @@ function init() {
 
 		var marker = new google.maps.Marker({
 			map: map,
-			icon: 'http://enxame.in/wp-content/themes/invert/images/pin.png',
+			icon: 'https://cdn0.iconfinder.com/data/icons/30_Free_Black_ToolBar_Icons/40/Black_MapDrop.png',
 			position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
 			animation: google.maps.Animation.DROP,
 		});
