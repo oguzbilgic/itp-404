@@ -1,0 +1,19 @@
+html, body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px
+}
+
+#map-canvas {
+	height: 50%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px
+	position: left;
+}
+
+#list {
+	position: right;
+	height: 50%;
+	width: 100%;
+}

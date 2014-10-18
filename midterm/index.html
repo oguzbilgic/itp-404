@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>App</title>
+
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="main.js"></script>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+    <div id="map-canvas">
+	</div>
+
+    <div id="list">
+	</div>
+</body>
+
+<script id="event-template" type="text/x-handlebars-template">
+	<p><a href="{{url}}">{{title}}</a></p>
+	<p>Description: {{description}}</p>
+	<p>Venue Address: {{venue_address}}</p>
+	<p>City: {{city_name}}</p>
+	<p>Country: {{country_name}}</p>
+	<img src="{{image.medium.url}}"/>
+	<hr/>
+</script>
+</html>
