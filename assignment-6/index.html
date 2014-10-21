@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ITP-404 Midterm App</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="main.js"></script>
+</head>
+
+<body>
+    <h2>Facebook page info</h2>
+	<span>pepsi, bmw, nokia, microsoft, lg</span>
+	<form id="searchForm">
+		<input type="text" id="username" value="pepsi" placeholder="Name" />
+		<input type="submit" value="Fetch page info">
+	</form>
+	<div id="resp">
+	</div>
+</body>
+
+<script id="page-template" type="text/x-handlebars-template">
+	<h3><a href="{{link}}">{{name}}</a></h3>
+	<img src="{{cover.source}}"/>
+	<div>Description: {{{about}}}</div>
+</script>
+</html>
