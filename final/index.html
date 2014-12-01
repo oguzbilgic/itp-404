@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="itp">
+<head>
+	<title>Insta2gram</title>
+	<link rel="stylesheet" href="http://bootswatch.com/paper/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+	<div ng-controller="SearchController">
+
+		<div class="row" style="margin-top: 50px" ng-if="!userQuery && !postQuery && !tagQuery">
+			<div class="col-md-12">
+				<div class="jumbotron">
+					<h3>Insta<sup>2</sup>gram</h3>
+					<p>Fastest way to search instagram</p>
+				</div>
+			</div>
+		</div>
+
+		<h4 ng-if="userQuery || postQuery">Insta<sup>2</sup>gram</h4>
+
+		<div class="row">
+			<div class="col-md-6">
+				<form role="form" ng-keyup="searchUser(userQuery)">
+					<input type="text" class="form-control" ng-model="userQuery" placeholder="search users...">
+				</form>
+			</div>
+			<div class="col-md-6">
+				<form role="form" ng-keyup="searchPost(postQuery)">
+					<input type="text" class="form-control" ng-model="postQuery" placeholder="search posts...">
+				</form>
+			</div>
+		</div>
+
+		<!-- PostQuery -->
+		<div class="row" ng-if="postQuery">
+			<div class="col-md-12">
+				<h4>Posts</h4>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a href="{{media.link}}" ng-repeat="media in medias">
+							<img src="{{media.images.low_resolution.url}}" height="219px" width="219px" />
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- UserQuery -->
+		<div class="row" ng-if="userQuery">
+			<div class="col-md-6">
+				<h4>Users</h4>
+
+				<div class="list-group" ng-repeat="user in users" ng-click="showUser(user)">
+					<div class="list-group-item">
+						<div class="list-group-item-heading">
+							<img src="{{user.profile_picture}}" height="50px" width="50px" />
+							<h4 style="display: inline;">@{{user.username}}</h4>
+						</div>
+						<p class="list-group-item-text">{{user.bio}}</p>
+						<span class="badge" ng-if="currentUser.id == user.id">selected</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6" ng-if="currentUser.isPrivate">
+				<div class="alert alert-dismissable alert-warning">
+					<p> This user is private </p>
+				</div>
+			</div>
+
+			<div class="col-md-6" ng-if="!currentUser.isPrivate">
+				<h4>@{{currentUser.username}} ({{currentUser.full_name}})</h4>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<img class="float: left;" src="{{currentUser.profile_picture}}" />
+						<div style="display: inline;">
+							<p>{{currentUser.bio}}</p>
+							<p>Followed by: {{currentUser.counts.followed_by}}</p>
+							<p>Follows: {{currentUser.counts.follows}}</p>
+							<p>Posts: {{currentUser.counts.media}}</p>
+							<a href="{{currentUser.website}}">{{currentUser.website}}</a>
+						</div>
+					</div>
+				</div>
+
+				<h4>User's Posts</h4>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<span ng-repeat="media in currentUser.medias">
+							<img src="{{media.images.low_resolution.url}}" height="170px" width="170px" />
+						</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script src="framework/angular/angular.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
